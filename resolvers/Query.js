@@ -1,10 +1,11 @@
 exports.Query = {
     products: (parent, args, {products}) => {
-        return products
+        return products;
     },
     product: (parent, {id: productId}, {products}) => {
         //const productId = args.id;
         const product = products.find((product) => product.id === productId);
+        return product;
     },
     categories: (parent, args, {categories}) => {
         return categories;

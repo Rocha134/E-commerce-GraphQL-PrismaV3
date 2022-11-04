@@ -114,7 +114,7 @@ const products = [
       title: "This is bad",
       comment: "when i bought this it broke the stove",
       rating: 1,
-      productId: 1,
+      productId: "53a0724c-a416-4cac-ae45-bfaedce1f147",
     },
     {
       id: "78851fe8-a657-410f-9b0a-2bc952636e16",
@@ -290,4 +290,5 @@ const products = [
   module.exports = {
     products,
     categories,
+    reviews,
   };

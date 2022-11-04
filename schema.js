@@ -24,11 +24,20 @@ exports.typeDefs = gql`
         image: String
         onSale: Boolean!
         category: Category
+        reviews: [Review!]!
     }
 
     type Category {
         name: String!
         id: ID!
         products: [Product!]!
+    }
+
+    type Review {
+        id: ID!
+        date: String!
+        title: String!
+        comment: String!
+        rating: Int!
     }
 `;
