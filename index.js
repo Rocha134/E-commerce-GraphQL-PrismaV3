@@ -1,3 +1,4 @@
+#Francisco Rocha Juárez
 const { ApolloServer } = require("apollo-server");
 const { products, categories, reviews } = require("./db");
 const { typeDefs } = require("./schema");
