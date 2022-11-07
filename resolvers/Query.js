@@ -1,6 +1,14 @@
 exports.Query = {
-    products: (parent, args, {products}) => {
-        return products;
+    products: (parent, {filter}, {products}) => {
+        let filteredProducts = products;
+        if (filter/*if filter is defined*/){
+            if(filter.onSale === true){
+                filteredProducts = filteredProducts.filter((product) => {
+                    return product.onSale; //Only returns products that are onSale. onSale is true
+                });
+            }
+        }
+        return filteredProducts;
     },
     product: (parent, {id: productId}, {products}) => {
         //const productId = args.id;
