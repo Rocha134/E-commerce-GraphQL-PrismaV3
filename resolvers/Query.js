@@ -1,10 +1,26 @@
 exports.Query = {
-    products: (parent, {filter}, {products}) => {
+    products: (parent, {filter}, {products, reviews}) => {
         let filteredProducts = products;
         if (filter/*if filter is defined*/){
-            if(filter.onSale === true){
+            const { onSale, avgRating } = filter
+            if(onSale === true){
                 filteredProducts = filteredProducts.filter((product) => {
                     return product.onSale; //Only returns products that are onSale. onSale is true
+                });
+            }
+            if([1,2,3,4,5].includes(avgRating)){
+                filteredProducts = filteredProducts.filter((product) => {
+                    let sumRating = 0;
+                    let numReviews = 0;
+                    reviews.forEach(review => {
+                        if(review.productId === product.id){
+                            sumRating += review.rating;
+                            numReviews++;
+                        }
+                    });
+                    //console.log(sumRating, product.name);
+                    const avgProductRating = sumRating / numReviews;
+                    return avgProductRating >= avgRating;
                 });
             }
         }
