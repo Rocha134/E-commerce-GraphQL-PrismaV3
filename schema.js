@@ -7,10 +7,10 @@ exports.typeDefs = gql`
     #---Query---
     type Query {
         #products: [Product!]!
-        product(id: ID!): ProductPayload
-        categories: CategoriesPayload
-        category(id: ID!): CategoryPayload
-        products(filter: ProductsFilterInput): ProductsPayload
+        product(id: ID!): Product
+        categories: [Category!]!
+        category(id: ID!): Category
+        products(filter: ProductsFilterInput): [Product!]!
     }
 
     #---Payloads---
