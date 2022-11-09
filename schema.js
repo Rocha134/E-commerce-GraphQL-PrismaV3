@@ -7,10 +7,10 @@ exports.typeDefs = gql`
     #---Query---
     type Query {
         #products: [Product!]!
-        product(id: ID!): Product
-        categories: [Category!]!
-        category(id: ID!): Category
-        products(filter: ProductsFilterInput): [Product!]!
+        getProduct(id: ID!): Product
+        getCategories: [Category!]!
+        getCategory(id: ID!): Category
+        getProducts(filter: ProductsFilterInput): [Product!]!
     }
 
     #---Payloads---
@@ -34,6 +34,7 @@ exports.typeDefs = gql`
     #---Mutations---
     type Mutation {
         addCategory(input: AddCategoryInput!): Category!
+        addProduct(input: AddProductInput!): Product!
     }
 
     #---Inputs---
@@ -45,6 +46,16 @@ exports.typeDefs = gql`
 
     input AddCategoryInput {
         name: String!
+    }
+
+    input AddProductInput{
+        name: String!
+        description: String!
+        quantity: Int!
+        image: String!
+        price: Float!
+        onSale: Boolean!
+        categoryId: String!
     }
 
     #---Types---

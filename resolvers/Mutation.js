@@ -10,4 +10,31 @@ exports.Mutation = {
         categories.push(newCategory);
         return newCategory;
     },
+    addProduct: (parent, {input}, {products}) => {
+        const {
+            name,
+            image,
+            price,
+            onSale,
+            quantity,
+            categoryId,
+            description,
+        } = input;
+
+        //We should check if 
+
+        const newProduct = {
+            id: uuid(),
+            name,
+            image,
+            price,
+            onSale,
+            quantity,
+            categoryId,
+            description,
+        }
+
+        products.push(newProduct);
+        return newProduct;
+    }
 };

@@ -1,5 +1,5 @@
 exports.Query = {
-    products: (parent, {filter}, {products, reviews}) => {
+    getProducts: (parent, {filter}, {products, reviews}) => {
         let filteredProducts = products;
         if (filter/*if filter is defined*/){
             const { onSale, avgRating } = filter
@@ -26,15 +26,15 @@ exports.Query = {
         }
         return filteredProducts;
     },
-    product: (parent, {id: productId}, {products}) => {
+    getProduct: (parent, {id: productId}, {products}) => {
         //const productId = args.id;
         const product = products.find((product) => product.id === productId);
         return product;
     },
-    categories: (parent, args, {categories}) => {
+    getCategories: (parent, args, {categories}) => {
         return categories;
     },
-    category: (parent, {id}, {categories}) => {
+    getCategory: (parent, {id}, {categories}) => {
         //This is the same but more professional
        //const { id } = args;
        return categories.find((category) => category.id === id);
