@@ -59,5 +59,17 @@ exports.Mutation = {
         db.reviews.push(newReview);
 
         return newReview;
-    }
+    },
+
+    deleteCategory: (parent, {id}, {db}) => {
+        db.categories = db.categories.filter((category) => category.id !== id);
+        db.products = db.products.map((product) => {
+            if(product.categoryId === id) return {
+                ...product, //Distrocture out everything from the product
+                categoryId: null, //Override the categoryId
+            };
+            else product;
+        });
+        return true;
+    },
 };
