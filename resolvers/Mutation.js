@@ -68,7 +68,7 @@ exports.Mutation = {
                 ...product, //Distrocture out everything from the product
                 categoryId: null, //Override the categoryId
             };
-            else product;
+            else return product;
         });
         return true;
     },
