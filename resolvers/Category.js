@@ -1,9 +1,9 @@
 exports.Category = {
-    products: ({id: categoryId}/*WE GET the id from the parent and we rename it to categoryId */, {filter}, {products, reviews}) => {
+    products: ({id: categoryId}/*WE GET the id from the parent and we rename it to categoryId */, {filter}, {db}) => {
        //Return the products for that specific category (One to Many)
        //console.log(parent);
        //const categoryId = parent.id;
-       const categoryProducts = products.filter((product) => product.categoryId === categoryId);
+       const categoryProducts = db.products.filter((product) => product.categoryId === categoryId);
        let filteredProducts = categoryProducts;
        if (filter){
          if (filter.onSale === true){
@@ -15,7 +15,7 @@ exports.Category = {
             filteredProducts = filteredProducts.filter((product) => {
                let sumRating = 0;
                let numReviews = 0;
-               reviews.forEach(review => {
+               db.reviews.forEach(review => {
                   if(review.productId === product.id){
                      sumRating += review.rating;
                      numReviews++;

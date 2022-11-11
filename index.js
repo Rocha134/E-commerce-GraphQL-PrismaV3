@@ -1,6 +1,6 @@
 //Francisco Rocha Juárez
 const { ApolloServer } = require("apollo-server");
-const { products, categories, reviews } = require("./db");
+const { db } = require("./db");
 const { typeDefs } = require("./schema");
 const { Category } = require("./resolvers/Category");
 const { Query } = require("./resolvers/Query");
@@ -16,9 +16,7 @@ const server = new ApolloServer({
       Mutation,
     },
     context: {
-      categories,
-      products,
-      reviews,
+      db,
     },
 });
 
