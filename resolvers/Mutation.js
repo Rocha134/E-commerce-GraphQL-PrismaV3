@@ -62,14 +62,24 @@ exports.Mutation = {
     },
 
     deleteCategory: (parent, {id}, {db}) => {
+        //We assign the categories that do not have the id to the categories array
         db.categories = db.categories.filter((category) => category.id !== id);
+        // From the products array we map the products that do not have the id of the category
         db.products = db.products.map((product) => {
-            if(product.categoryId === id) return {
-                ...product, //Distrocture out everything from the product
-                categoryId: null, //Override the categoryId
-            };
-            else return product;
+            if(product.categoryId === id){
+                return {...product, categoryId: null}; //We return the product with the categoryId set to null because the category was deleted
+            }
+            return product;
         });
         return true;
     },
+
+
+    deleteProduct: (parent, {id}, {db}) => {
+        //We need to delete the product from the products array
+        db.products = db.products.filter((product) => product.id !== id);
+        //We need to delete the reviews from the reviews array
+        db.reviews = db.reviews.filter((review) => review.productId !== id);
+        return true;
+    }
 };
