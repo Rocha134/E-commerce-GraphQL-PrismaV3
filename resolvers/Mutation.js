@@ -2,7 +2,7 @@ const { v4: uuid } = require("uuid")
 
 exports.Mutation = {
     addCategory: (parent, { input }, { db }) => {
-        const { name } = input;
+        const { name } = input; //Destructuring
         const newCategory = {
             id: uuid(),
             name,
@@ -11,6 +11,7 @@ exports.Mutation = {
         return newCategory;
     },
     addProduct: (parent, {input}, {db}) => {
+        // The input is the object that contains the data that we want to add
         const {
             name,
             image,
@@ -21,7 +22,7 @@ exports.Mutation = {
             description,
         } = input;
 
-        //We should check if 
+        //We should check if
 
         const newProduct = {
             id: uuid(),
@@ -81,5 +82,24 @@ exports.Mutation = {
         //We need to delete the reviews from the reviews array
         db.reviews = db.reviews.filter((review) => review.productId !== id);
         return true;
+    },
+
+    deleteReview: (parent, {id}, {db}) => {
+        //We need to delete the review from the reviews array
+        db.reviews = db.reviews.filter((review) => review.id !== id);
+        return true;
+    },
+
+    updateCategory: (parent, {input}, {db}) => {
+        const {id, name} = input; //Destructuring
+        const index = db.categories.findIndex((category) => category.id === id); //We find the index of the category that we want to update
+        if(index === -1) throw new Error("Category not found"); //If the index is -1, the category was not found
+        const category = db.categories[index];
+        const updatedCategory = {
+            ...category, //We copy the properties of the category
+            name, //We overwrite the name property
+        };
+        db.categories[index] = updatedCategory; //We replace the category in the array
+        return updatedCategory; //We return the updated category
     }
 };
